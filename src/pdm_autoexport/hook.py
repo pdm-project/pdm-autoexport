@@ -15,6 +15,14 @@ class ExportConfig:
     groups: Iterable[str] = ("default",)
     without_hashes: bool = False
 
+    def __post_init__(self):
+        if self.format not in ("requirements", "setuppy"):
+            raise ValueError(
+                f"Unsupported format: {self.format}, must be requirements or setuppy"
+            )
+        if not self.groups:
+            raise ValueError("No groups specified")
+
 
 def export_config(project: Project) -> Iterable[ExportConfig]:
     """
