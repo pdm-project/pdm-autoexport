@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING, Any, Iterable
 
 if TYPE_CHECKING:
-    from pdm import Project
+    from pdm.project import Project
 
 
 @dataclass
