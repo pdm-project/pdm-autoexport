@@ -16,9 +16,9 @@ class ExportConfig:
     without_hashes: bool = False
 
     def __post_init__(self):
-        if self.format not in ("requirements", "setuppy"):
+        if self.format not in ("requirements",):
             raise ValueError(
-                f"Unsupported format: {self.format}, must be requirements or setuppy"
+                f"Unsupported format: {self.format}, now only requirements is supported"
             )
         if not self.groups:
             raise ValueError("No groups specified")

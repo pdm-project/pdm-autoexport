@@ -21,7 +21,6 @@ def test_pdm_autoexport(tmp_project: Project):
     requirements_test_txt = tmp_project.root.joinpath(
         "requirements-test.txt"
     ).read_text()
-    setup_py = tmp_project.root.joinpath("setup.py").read_text()
     assert any(line.startswith("requests==") for line in requirements_txt.splitlines())
     assert any(line.startswith("urllib3==") for line in requirements_txt.splitlines())
     assert any(
@@ -37,4 +36,3 @@ def test_pdm_autoexport(tmp_project: Project):
         line.strip().startswith("--hash=")
         for line in requirements_test_txt.splitlines()
     )
-    assert any(line.strip().startswith("'requests'") for line in setup_py.splitlines())

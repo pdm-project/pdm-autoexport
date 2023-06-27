@@ -17,6 +17,3 @@ filename = "requirements-test.txt"
 groups = ["test"]
 without-hashes = true
 
-[[tool.pdm.autoexport]]
-filename = "setup.py"
-format = "setuppy"
