@@ -28,7 +28,7 @@ def export_config(project: Project) -> Iterable[ExportConfig]:
     """
     Load the auto-export config.
     """
-    tool_settings = project.tool_settings
+    tool_settings = project.pyproject.settings
     return (
         ExportConfig(
             filename=item["filename"],
@@ -47,7 +47,7 @@ def run_auto_export(project: Project, dry_run: bool, **kwargs: Any) -> None:
     if dry_run:
         return
     core = project.core
-    dev_groups = set(project.tool_settings.get("dev-dependencies", []))
+    dev_groups = set(project.pyproject.settings.get("dev-dependencies", []))
     for config in export_config(project):
         group_args = ["--no-default"]
         if dev_groups.isdisjoint(config.groups):
