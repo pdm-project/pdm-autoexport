@@ -45,3 +45,4 @@ The configuration is an array of table `[[tool.pdm.autoexport]]` where each item
 - `format` (optional, default: `"requirements"`): The format of the exported file, same as the `--format` option to the `pdm export` command.
   Only `requirements` and `setuppy` are supported.
 - `without-hashes` (optional, default: `false`): Whether to remove the hashes from the exported file. Only applicable to `requirements` format.
+- `pyproject` (optional, default: `false`): Whether to read dependencies from `pyproject.toml` (see `--pyproject` option to the `pdm export` command).

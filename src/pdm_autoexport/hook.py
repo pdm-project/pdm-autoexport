@@ -14,6 +14,7 @@ class ExportConfig:
     format: str = "requirements"
     groups: Iterable[str] = ("default",)
     without_hashes: bool = False
+    pyproject: bool = False
 
     def __post_init__(self):
         if self.format not in ("requirements",):
@@ -35,6 +36,7 @@ def export_config(project: Project) -> Iterable[ExportConfig]:
             format=item.get("format", "requirements"),
             groups=item.get("groups", ["default"]),
             without_hashes=item.get("without-hashes", False),
+            pyproject=item.get("pyproject", False),
         )
         for item in tool_settings.get("autoexport", [])
     )
@@ -55,12 +57,14 @@ def run_auto_export(project: Project, dry_run: bool, **kwargs: Any) -> None:
         for group in config.groups:
             group_args.extend(["--group", group])
         hash_args = ["--without-hashes"] if config.without_hashes else []
+        pyproject_args = ["--pyproject"] if config.pyproject else []
         args = [
             "export",
             "--format",
             config.format,
             *group_args,
             *hash_args,
+            *pyproject_args,
             "--output",
             os.path.join(project.root, config.filename),
         ]
