@@ -17,3 +17,7 @@ filename = "requirements-test.txt"
 groups = ["test"]
 without-hashes = true
 
+[[tool.pdm.autoexport]]
+filename = "requirements-pyproject.txt"
+pyproject = true
+
