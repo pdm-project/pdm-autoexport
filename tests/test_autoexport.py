@@ -21,11 +21,15 @@ def test_pdm_autoexport(tmp_project: Project):
     requirements_test_txt = tmp_project.root.joinpath(
         "requirements-test.txt"
     ).read_text()
+    requirements_pyproject_txt = tmp_project.root.joinpath(
+        "requirements-pyproject.txt"
+    ).read_text()
     assert any(line.startswith("requests==") for line in requirements_txt.splitlines())
     assert any(line.startswith("urllib3==") for line in requirements_txt.splitlines())
     assert any(
         line.strip().startswith("--hash=") for line in requirements_txt.splitlines()
     )
+
     assert not any(
         line.startswith("requests==") for line in requirements_test_txt.splitlines()
     )
@@ -35,4 +39,11 @@ def test_pdm_autoexport(tmp_project: Project):
     assert not any(
         line.strip().startswith("--hash=")
         for line in requirements_test_txt.splitlines()
+    )
+
+    assert any(
+        line == "requests" for line in filter(
+            lambda x: x.rstrip() and not x.lstrip().startswith("#"),
+            requirements_pyproject_txt.splitlines()
+        )
     )
