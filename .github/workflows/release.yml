@@ -11,13 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v5
         with:
-          node-version: 16.x
+          node-version: lts/*
 
       - run: npx changelogithub
         env:
@@ -29,8 +29,7 @@ jobs:
 
       - name: Build artifacts
         run: |
-          python -m pip install build
-          python -m build
+          pipx run build
 
       - name: Upload to Pypi
         run: |

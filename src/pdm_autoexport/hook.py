@@ -49,7 +49,7 @@ def run_auto_export(project: Project, dry_run: bool, **kwargs: Any) -> None:
     if dry_run:
         return
     core = project.core
-    dev_groups = set(project.pyproject.settings.get("dev-dependencies", []))
+    dev_groups = set(project.pyproject.dev_dependencies)
     for config in export_config(project):
         group_args = ["--no-default"]
         if dev_groups.isdisjoint(config.groups):

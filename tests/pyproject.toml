@@ -2,11 +2,12 @@
 name = "test-pdm"
 version = "0.1.0"
 dependencies = ["requests"]
+requires-python = ">=3.9"
 
 [project.optional-dependencies]
 socks = ["PySocks"]
 
-[tool.pdm.dev-dependencies]
+[dependency-groups]
 test = ["pytest"]
 
 [[tool.pdm.autoexport]]
